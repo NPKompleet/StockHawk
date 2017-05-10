@@ -24,6 +24,7 @@ class DbHelper extends SQLiteOpenHelper {
                 + Quote._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Quote.COLUMN_SYMBOL + " TEXT NOT NULL, "
                 + Quote.COLUMN_PRICE + " REAL NOT NULL, "
+                + Quote.COLUMN_NAME + " TEXT NOT NULL, "
                 + Quote.COLUMN_ABSOLUTE_CHANGE + " REAL NOT NULL, "
                 + Quote.COLUMN_PERCENTAGE_CHANGE + " REAL NOT NULL, "
                 + Quote.COLUMN_HISTORY + " TEXT NOT NULL, "

@@ -29,7 +29,21 @@
     <string name="error_no_network">No network connectivity! Will load stock cursor when the network is available.</string>
     <string name="error_no_stocks">No stocks added! Hit the floating action button to add one.</string>
 
+    <!--add stock floating action button description-->
+    <string name="fab_description">Add stock</string>
+    <!--stock trend line chart description-->
+    <string name="stock_trend_description">Stock trend</string>
+
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="large_text" formatted="false">
+        The foregoing graph shows the stock trend of %s stock over the las 5 years in a weekly interval.\n\n
+
+        As can be seen, the price 5 years ago is %s and the current price is %s. Over this 5 year interval the minimum and
+        maximum price are %s and %s respectively.\n\n
+    </string>
+    <string name="title_activity_stock_detail">StockDetailActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>
