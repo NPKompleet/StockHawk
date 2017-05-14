@@ -46,6 +46,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.udacity.stockhawk.ui.MainActivity" />
         </activity>
+
+        <receiver android:name=".StockHawkWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:icon="@drawable/widget_preview"
+                android:resource="@xml/stock_hawk_widget_info" />
+        </receiver>
+
+        <service android:name="com.udacity.stockhawk.StockWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
     </application>
 
 </manifest>

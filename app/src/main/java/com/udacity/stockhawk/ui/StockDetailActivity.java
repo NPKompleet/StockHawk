@@ -29,7 +29,6 @@ import java.util.Collections;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.udacity.stockhawk.ui.MainActivity.SYMBOL_KEY;
 
 public class StockDetailActivity extends AppCompatActivity {
 
@@ -43,6 +42,8 @@ public class StockDetailActivity extends AppCompatActivity {
 
     String stockFullName= null;
     ActionBar actionBar;
+    //final String SYMBOL_KEY= "symbol";
+
 
 
     @Override
@@ -51,11 +52,9 @@ public class StockDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stock_detail);
         ButterKnife.bind(this);
 
-        //float yValues []= {10, 20, 30, 15, 55, 40};
-        //float xValues []= {1.0f, 2.0f, 3.3f, 5.4f, 6.6f, 7};
-
-        Bundle extra= getIntent().getBundleExtra("symbol");
-        String symbol= extra.getString(SYMBOL_KEY);
+        //Bundle extra= getIntent().getBundleExtra("symbol");
+        //String symbol= extra.getString(SYMBOL_KEY);
+        String symbol= getIntent().getStringExtra(getString(R.string.symbol_intent_key));
 
         actionBar= getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -63,21 +62,22 @@ public class StockDetailActivity extends AppCompatActivity {
 
 
 
-
+        //build uri for symbol
         Uri uri = Contract.Quote.URI.buildUpon()
                 .appendPath(symbol)
                 .build();
+        //select only the stock fullname and historry
         String projection []= {Contract.Quote.COLUMN_NAME, Contract.Quote.COLUMN_HISTORY};
         Cursor cus= getContentResolver().query(uri, projection, null, null, null);
         String s= null;
 
         if (cus != null){
             cus.moveToFirst();
-            for (int i = 0; i < cus.getCount(); i++) {
-                s = cus.getString(cus.getColumnIndexOrThrow(Contract.Quote.COLUMN_HISTORY));
-                stockFullName = cus.getString(cus.getColumnIndexOrThrow(Contract.Quote.COLUMN_NAME));
-                cus.moveToNext();
-            }
+            //for (int i = 0; i < cus.getCount(); i++) {
+            s = cus.getString(cus.getColumnIndexOrThrow(Contract.Quote.COLUMN_HISTORY));
+            stockFullName = cus.getString(cus.getColumnIndexOrThrow(Contract.Quote.COLUMN_NAME));
+            /*    cus.moveToNext();
+            }*/
             cus.close();
         }
 
@@ -106,7 +106,7 @@ public class StockDetailActivity extends AppCompatActivity {
 
     private void drawLineChart(float yValues[], String symbol){
         Description desc= new Description();
-        desc.setText(stockFullName +" 5-year stock trend");
+        desc.setText(stockFullName +" "+ this.getString(R.string.x_year_stock_trend));
         lineChart.setDescription(desc);
         ArrayList<Entry> yData= new ArrayList<>();
         int m= yValues.length-1;
@@ -114,12 +114,6 @@ public class StockDetailActivity extends AppCompatActivity {
             //reverse collections to make sure the latest closing price is on the right
             yData.add(new Entry(i, yValues[m-i]));
         }
-        /*ArrayList<String> xData= new ArrayList<>();
-        for (String data : xValues){
-            xData.add(data);
-        }*/
-
-
 
         LineDataSet lineDataSet= new LineDataSet(yData, symbol);
         lineDataSet.setColors(ColorTemplate.MATERIAL_COLORS);

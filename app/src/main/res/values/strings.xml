@@ -33,17 +33,32 @@
     <string name="fab_description">Add stock</string>
     <!--stock trend line chart description-->
     <string name="stock_trend_description">Stock trend</string>
+    <!--shows an image indicating positive r negative stock change on the widget-->
+    <string name="widget_stock_change_image">Stock change</string>
 
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text" formatted="false">
-        The foregoing graph shows the stock trend of %s stock over the las 5 years in a weekly interval.\n\n
-
+        The foregoing graph shows the stock trend of %s stock over the last 5 years in a weekly interval.\n\n
         As can be seen, the price 5 years ago is %s and the current price is %s. Over this 5 year interval the minimum and
         maximum price are %s and %s respectively.\n\n
+        Zoom the graph to see precise value of stock for each week.
     </string>
+
+    <string name="x_year_stock_trend">5-year stock trend</string>
+    <string name="symbol_clicked">"Symbol clicked: "</string>
+    <string name="not_valid_symbol">" Not a valid stock option. Removed"</string>
+
+    <string name="symbol_intent_key" translatable="false">"symbol"</string>
+
+
+
+
     <string name="title_activity_stock_detail">StockDetailActivity</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="appwidget_text">No Data Loaded Yet. Click to Open Application</string>
+    <string name="add_widget">Add widget</string>
+    <string name="widget_title">My Stock Widget</string>
 
 </resources>
