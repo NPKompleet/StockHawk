@@ -26,20 +26,18 @@ import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 import com.udacity.stockhawk.sync.QuoteSyncJob;
 
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
+
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
         SwipeRefreshLayout.OnRefreshListener,
         StockAdapter.StockAdapterOnClickHandler {
 
     private static final int STOCK_LOADER = 0;
-    //final String SYMBOL_KEY= this.getString(R.string.symbol_intent_key);
+
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.recycler_view)
     RecyclerView stockRecyclerView;
@@ -53,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     final Context context= this;
 
-
     @Override
     public void onClick(String symbol) {
         Timber.d("Symbol clicked: %s", symbol);
@@ -61,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Intent i = new Intent(this, StockDetailActivity.class);
         i.putExtra(getString(R.string.symbol_intent_key), symbol);
-        //i.putExtra("symbol", bundle);
         startActivity(i);
     }
 
@@ -98,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         }).attachToRecyclerView(stockRecyclerView);
 
-
     }
 
     private boolean networkUp() {
@@ -134,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     void addStock(String symbol) {
-       // Stock stock= null;
+
         if (symbol != null && !symbol.isEmpty()) {
 
             if (networkUp()) {
@@ -145,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
             }
+            //since there is no way to know if stock is valid when there is no internet,
+            //add stock in any case and handle the removal of invalid stock if there is internet
             PrefUtils.addStock(this, symbol);
             QuoteSyncJob.syncImmediately(this);
             StockHawkWidget.sendRefreshBroadcast(this);
